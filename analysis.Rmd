@@ -1,6 +1,6 @@
 ---
 title: "analysis"
-author: "you"
+author: "Sofie Zacho Vestergaard"
 date: "2/16/2022"
 output: html_document
 ---
@@ -9,12 +9,27 @@ output: html_document
 knitr::opts_chunk$set(
   echo = TRUE
 )
-library(ampvis2)
+suppressPackageStartupMessages({library(ampvis2)
+  library(dplyr)})
+
 ```
 
 # Load some data
 ```{r}
 # add and load your own or use fx AalborgWWTPs
+meta <- read.csv('~/Desktop/Thesis/Data/MFD/2021-06-02-14-15_mdf_metadata.csv') %>%
+  rename('mfd_sample' = id_sequencing_admera)
+data <- read.csv('/Users/sofiezacho/Desktop/Thesis/Data/output/Kraken2/d_MFD_final_head100_stream_lake.csv')
+
+# fix col names in data dataframe
+colnames(data)<-gsub("X","",colnames(data))
+colnames(data)<- gsub(x = colnames(data), pattern = "\\.", replacement = "-")
+colnames(data)=gsub("_S.*$","",colnames(data))
+
+# load into ampvis object 
+d_amp <- amp_load(otutable = data,
+                  metadata = meta)
+
 ```
 
 # Do some QC
