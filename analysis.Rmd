@@ -18,42 +18,45 @@ library(ampvis2)
 # Load some data
 ```{r}
 # add and load your own or use fx AalborgWWTPs
-setwd("C:/Users/shj/OneDrive - Aalborg Universitet/MUDP/BIO_data/data")
-
-#Import data ASV table with taxonomy - no need to use sintax file.
-otutable <- read.delim("ASVtable_MIDAS.tsv", check.names = FALSE) 
-metadata <- readxl::read_excel("metadata.xlsx")
-
-metadata <- mutate(metadata, SampleSite = factor(SampleSite)) 
-metadata <- mutate(metadata, Campaign = factor(Campaign)) 
-
-#remove datapoint from ASV table (outlier)
-otutable[402, "MQ200110-214"] <- NA
-
-# Combine to ampvis2 object
-d_MUDP <- amp_load(otutable = otutable,
-              metadata = metadata)
-
-
+data("AalborgWWTPs")
 ```
 
 # Do some QC
 ```{r}
 # filter some samples or taxa
+
+subsettedData_AAE <- amp_subset_samples(AalborgWWTPs,
+                                    Plant %in% c("Aalborg East"),
+                                    normalise = TRUE
+                                    )
+
+
 ```
 
 # Alpha-diversity check, octave plots
 ```{r}
+ds <- amp_subset_samples(AalborgWWTPs, Year %in% 2014)
 
+amp_octave(ds,
+  group_by = "SampleID",
+  tax_aggregate = "Genus",
+  scales = "free_y",
+  num_threads = 1
+)
 ```
 
 # Make a simple overview heatmap
 ```{r}
-
+amp_heatmap(subsettedData_AAE,
+            group_by = "Plant",
+            tax_aggregate = "Phylum",
+            tax_add = "Genus",
+            normalise = FALSE
+            )
 ```
 
 # Fix this code
 ```{r}
-data.frame(class = unlist(lapply(mpg, classss)))
+data.frame(class = unlist(lapply(ds, class)))
 ```
 
