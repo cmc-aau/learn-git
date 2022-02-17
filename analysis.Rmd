@@ -9,26 +9,31 @@ output: html_document
 knitr::opts_chunk$set(
   echo = TRUE
 )
-suppressPackageStartupMessages({library(ampvis2)
-  library(dplyr)})
+install.packages("remotes")
+remotes::install_github("MadsAlbertsen/ampvis2")
 
+library(ampvis2)
 ```
 
 # Load some data
 ```{r}
 # add and load your own or use fx AalborgWWTPs
-meta <- read.csv('~/Desktop/Thesis/Data/MFD/2021-06-02-14-15_mdf_metadata.csv') %>%
-  rename('mfd_sample' = id_sequencing_admera)
-data <- read.csv('/Users/sofiezacho/Desktop/Thesis/Data/output/Kraken2/d_MFD_final_head100_stream_lake.csv')
+setwd("C:/Users/shj/OneDrive - Aalborg Universitet/MUDP/BIO_data/data")
 
-# fix col names in data dataframe
-colnames(data)<-gsub("X","",colnames(data))
-colnames(data)<- gsub(x = colnames(data), pattern = "\\.", replacement = "-")
-colnames(data)=gsub("_S.*$","",colnames(data))
+#Import data ASV table with taxonomy - no need to use sintax file.
+otutable <- read.delim("ASVtable_MIDAS.tsv", check.names = FALSE) 
+metadata <- readxl::read_excel("metadata.xlsx")
 
-# load into ampvis object 
-d_amp <- amp_load(otutable = data,
-                  metadata = meta)
+metadata <- mutate(metadata, SampleSite = factor(SampleSite)) 
+metadata <- mutate(metadata, Campaign = factor(Campaign)) 
+
+#remove datapoint from ASV table (outlier)
+otutable[402, "MQ200110-214"] <- NA
+
+# Combine to ampvis2 object
+d_MUDP <- amp_load(otutable = otutable,
+              metadata = metadata)
+
 
 ```
 
