@@ -23,6 +23,13 @@ data("AalborgWWTPs")
 # Do some QC
 ```{r}
 # filter some samples or taxa
+
+subsettedData_AAE <- amp_subset_samples(AalborgWWTPs,
+                                    Plant %in% c("Aalborg East"),
+                                    normalise = TRUE
+                                    )
+
+
 ```
 
 # Alpha-diversity check, octave plots
