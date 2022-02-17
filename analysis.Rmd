@@ -1,6 +1,6 @@
 ---
 title: "analysis"
-author: "you"
+author: "Sofie Zacho Vestergaard"
 date: "2/16/2022"
 output: html_document
 ---
@@ -9,15 +9,16 @@ output: html_document
 knitr::opts_chunk$set(
   echo = TRUE
 )
+install.packages("remotes")
+remotes::install_github("MadsAlbertsen/ampvis2")
+
 library(ampvis2)
 ```
 
 # Load some data
 ```{r}
 # add and load your own or use fx AalborgWWTPs
-
 data("AalborgWWTPs")
-
 ```
 
 # Do some QC
