@@ -56,6 +56,6 @@ amp_heatmap(subsettedData_AAE,
 
 # Fix this code
 ```{r}
-data.frame(class = unlist(lapply(mpg, classss)))
+data.frame(class = unlist(lapply(ds, class)))
 ```
 
