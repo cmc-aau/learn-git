@@ -9,6 +9,9 @@ output: html_document
 knitr::opts_chunk$set(
   echo = TRUE
 )
+install.packages("remotes")
+remotes::install_github("MadsAlbertsen/ampvis2")
+
 library(ampvis2)
 ```
 
