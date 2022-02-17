@@ -37,6 +37,7 @@ summer_tet <- amp_subset_samples(aaw, Period %in% "Summer") %>%
 
 # Fix this code
 ```{r}
-data.frame(class = unlist(lapply(mpg, classss)))
+#data.frame(class = unlist(lapply(mpg, classss)))
+data.frame(class = unlist(lapply(mpg, class)))
 ```
 
