@@ -34,7 +34,16 @@ summer_tet <- amp_subset_samples(aaw, Period %in% "Summer") %>%
 
 # Make a simple overview heatmap
 ```{r}
-
+amp_heatmap(
+  summer_tet,
+  group_by = NULL,
+  facet_by = NULL,
+  normalise = F,
+  tax_aggregate = "OTU",
+  tax_add = c("Genus", "Species"),
+  functions = c("MiDAS", "Filamentous", "AOB", "NOB", "PAO", "GAO"),
+  rel_widths = c(0.75, 0.25)
+)
 ```
 
 # Fix this code
