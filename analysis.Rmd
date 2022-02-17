@@ -18,6 +18,23 @@ library(ampvis2)
 # Load some data
 ```{r}
 # add and load your own or use fx AalborgWWTPs
+setwd("C:/Users/shj/OneDrive - Aalborg Universitet/MUDP/BIO_data/data")
+
+#Import data ASV table with taxonomy - no need to use sintax file.
+otutable <- read.delim("ASVtable_MIDAS.tsv", check.names = FALSE) 
+metadata <- readxl::read_excel("metadata.xlsx")
+
+metadata <- mutate(metadata, SampleSite = factor(SampleSite)) 
+metadata <- mutate(metadata, Campaign = factor(Campaign)) 
+
+#remove datapoint from ASV table (outlier)
+otutable[402, "MQ200110-214"] <- NA
+
+# Combine to ampvis2 object
+d_MUDP <- amp_load(otutable = otutable,
+              metadata = metadata)
+
+
 ```
 
 # Do some QC
