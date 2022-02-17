@@ -46,7 +46,12 @@ amp_octave(ds,
 
 # Make a simple overview heatmap
 ```{r}
-
+amp_heatmap(subsettedData_AAE,
+            group_by = "Plant",
+            tax_aggregate = "Phylum",
+            tax_add = "Genus",
+            normalise = FALSE
+            )
 ```
 
 # Fix this code
