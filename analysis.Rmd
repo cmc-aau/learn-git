@@ -34,7 +34,14 @@ subsettedData_AAE <- amp_subset_samples(AalborgWWTPs,
 
 # Alpha-diversity check, octave plots
 ```{r}
+ds <- amp_subset_samples(AalborgWWTPs, Year %in% 2014)
 
+amp_octave(ds,
+  group_by = "SampleID",
+  tax_aggregate = "Genus",
+  scales = "free_y",
+  num_threads = 1
+)
 ```
 
 # Make a simple overview heatmap
