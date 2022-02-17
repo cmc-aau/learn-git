@@ -1,6 +1,6 @@
 ---
 title: "analysis"
-author: "you"
+author: "Sofie Zacho Vestergaard"
 date: "2/16/2022"
 output: html_document
 ---
