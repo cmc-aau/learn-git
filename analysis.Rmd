@@ -20,6 +20,9 @@ library(ampvis2)
 # Do some QC
 ```{r}
 # filter some samples or taxa
+summer_tet <- amp_subset_samples(aaw, Period %in% "Summer") %>% 
+  amp_subset_taxa(., tax_vector = "g__Tetrasphaera")
+
 ```
 
 # Alpha-diversity check, octave plots
